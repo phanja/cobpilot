@@ -539,6 +539,12 @@ std::unordered_map<std::string, uint32_t> keys = {
     {"FrogId", PERSISTENT},
     {"UseFrogServer", PERSISTENT},
     {"RecordRoad", PERSISTENT},
+    {"TorqueInterceptorEnabled", PERSISTENT},
+    {"RadarInterceptorEnabled", PERSISTENT},
+    {"NoMRCC", PERSISTENT},
+    {"NoFSC", PERSISTENT},
+    {"BlendedACC", PERSISTENT},
+    {"ManualTransmission", PERSISTENT},
     {"LiveStreamRunning", CLEAR_ON_MANAGER_START},
     {"RemoteAccess", CLEAR_ON_MANAGER_START},
 };
