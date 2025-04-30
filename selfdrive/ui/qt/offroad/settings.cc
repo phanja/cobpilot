@@ -73,6 +73,12 @@ TogglesPanel::TogglesPanel(SettingsWindow *parent) : ListWidget(parent) {
       "../assets/offroad/icon_monitoring.png",
     },
     {
+      "LiveStreamRunning",
+      tr("Stream live video to Konik Stable"),
+      tr("Use the Konik Stable to stream your device's cameras in real time."),
+      "../assets/offroad/icon_monitoring.png",
+    },
+    {
       "IsMetric",
       tr("Use Metric System"),
       tr("Display speed in km/h instead of mph."),
