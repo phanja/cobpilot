@@ -724,6 +724,8 @@ void FrogPilotAnnotatedCameraWidget::paintPathEdges(QPainter &p) {
     setPathEdgeColors(bg_colors[STATUS_CONDITIONAL_OVERRIDDEN]);
   } else if (experimentalMode) {
     setPathEdgeColors(bg_colors[STATUS_EXPERIMENTAL_MODE_ENABLED]);
+  } else if (frogpilot_scene.traffic_mode_enabled) {
+    setPathEdgeColors(bg_colors[STATUS_TRAFFIC_MODE_ENABLED]);
   } else if (frogpilot_toggles.value("color_scheme").toString() != "stock") {
     setPathEdgeColors(QColor(frogpilot_toggles.value("path_edges_color").toString()));
   } else {
