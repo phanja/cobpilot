@@ -135,6 +135,7 @@ void FrogPilotAnnotatedCameraWidget::updateState(const UIState &s, const FrogPil
   cscTraining = frogpilotPlan.getCscTraining();
   experimentalMode = selfdriveState.getExperimentalMode();
   roadCurvature = frogpilotPlan.getRoadCurvature();
+  roadName = QString::fromStdString(params_memory.get("RoadName"));
 
   hideBottomIcons = selfdriveState.getAlertSize() != cereal::SelfdriveState::AlertSize::NONE;
   hideBottomIcons |= frogpilotSelfdriveState.getAlertSize() != cereal::FrogPilotSelfdriveState::AlertSize::NONE;
@@ -191,6 +192,10 @@ void FrogPilotAnnotatedCameraWidget::paintFrogPilotWidgets(QPainter &p, UIState 
     } else if (isCruiseSet && cscControllingSpeed) {
       paintCurveSpeedControl(p);
     }
+  }
+
+  if (frogpilot_toggles.value("road_name_ui").toBool()) {
+    paintRoadName(p);
   }
 
   if ((blinkerLeft || blinkerRight) && signalStyle != "None") {
@@ -408,6 +413,31 @@ void FrogPilotAnnotatedCameraWidget::paintCurveSpeedControlTraining(QPainter &p)
   p.setFont(InterFont(35, QFont::Bold));
   p.setPen(QPen(whiteColor(), 6));
   p.drawText(textRect.adjusted(20, 0, 0, 0), Qt::AlignVCenter | Qt::AlignLeft, "Training...");
+
+  p.restore();
+}
+
+void FrogPilotAnnotatedCameraWidget::paintRoadName(QPainter &p) {
+  if (roadName.isEmpty()) {
+    return;
+  }
+
+  p.save();
+
+  QFont font = InterFont(40, QFont::DemiBold);
+
+  int textWidth = QFontMetrics(font).horizontalAdvance(roadName);
+
+  QRect roadNameRect((width() - (textWidth + 100)) / 2, rect().bottom() - 55 + 1, textWidth + 100, 50);
+
+  p.setBrush(blackColor(166));
+  p.setOpacity(1.0);
+  p.setPen(QPen(blackColor(), 10));
+  p.drawRoundedRect(roadNameRect, 24, 24);
+
+  p.setFont(font);
+  p.setPen(QPen(whiteColor(), 6));
+  p.drawText(roadNameRect, Qt::AlignCenter, roadName);
 
   p.restore();
 }
