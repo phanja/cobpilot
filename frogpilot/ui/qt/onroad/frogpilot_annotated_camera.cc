@@ -209,7 +209,7 @@ void FrogPilotAnnotatedCameraWidget::paintFrogPilotWidgets(QPainter &p, UIState 
     }
   }
 
-  if (!hideBottomIcons && (frogpilotCarState.getForceCoast())) {
+  if (!hideBottomIcons && (frogpilotCarState.getForceCoast() || frogpilotCarState.getPauseLongitudinal())) {
     paintLongitudinalPaused(p);
   }
 
