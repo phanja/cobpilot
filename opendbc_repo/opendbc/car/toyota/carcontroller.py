@@ -182,7 +182,7 @@ class CarController(CarControllerBase):
     # *** gas and brake ***
 
     # on entering standstill, send standstill request for older TSS-P cars that aren't designed to stay engaged at a stop
-    if self.CP.carFingerprint not in NO_STOP_TIMER_CAR:
+    if self.CP.carFingerprint in NO_STOP_TIMER_CAR or frogpilot_toggles.sng_hack:
       if CS.out.standstill and not self.last_standstill:
         self.standstill_req = True
       if CS.pcm_acc_status != 8:
