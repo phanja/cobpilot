@@ -147,6 +147,7 @@ void FrogPilotAnnotatedCameraWidget::updateState(const UIState &s, const FrogPil
   forceCoast = frogpilotCarState.getForceCoast();
   laneWidthLeft = frogpilotPlan.getLaneWidthLeft();
   laneWidthRight = frogpilotPlan.getLaneWidthRight();
+  longitudinalPaused = frogpilotCarState.getPauseLongitudinal();
   redLight = frogpilotPlan.getRedLight();
   roadCurvature = frogpilotPlan.getRoadCurvature();
   roadName = QString::fromStdString(params_memory.get("RoadName"));
@@ -220,7 +221,7 @@ void FrogPilotAnnotatedCameraWidget::paintFrogPilotWidgets(QPainter &p, UIState 
     }
   }
 
-  if (!hideBottomIcons && (forceCoast)) {
+  if (!hideBottomIcons && (forceCoast || longitudinalPaused)) {
     paintLongitudinalPaused(p);
   }
 
