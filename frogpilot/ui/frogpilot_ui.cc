@@ -16,6 +16,9 @@ static void update_state(FrogPilotUIState *fs) {
   }
   if (fpsm.updated("frogpilotPlan")) {
     const cereal::FrogPilotPlan::Reader &frogpilotPlan = fpsm["frogpilotPlan"].getFrogpilotPlan();
+    if (frogpilotPlan.getThemeUpdated()) {
+      emit fs->themeUpdated();
+    }
     static QString previous_frogpilot_toggles = "";
     if (previous_frogpilot_toggles != frogpilotPlan.getFrogpilotToggles().cStr()) {
       frogpilot_scene.frogpilot_toggles = QJsonDocument::fromJson(QByteArray(frogpilotPlan.getFrogpilotToggles().cStr())).object();
