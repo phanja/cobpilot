@@ -22,10 +22,18 @@ private:
   void paintEvent(QPaintEvent *event);
   void paintFPS(QPainter &p);
   void paintSteeringTorqueBorder(QPainter &p);
+  void paintTurnSignalBorder(QPainter &p);
   void resizeEvent(QResizeEvent *event);
 
+  bool blindSpotLeft;
+  bool blindSpotRight;
+  bool flickerActive;
+  bool showBlindspot;
   bool showFPS;
+  bool showSignal;
   bool showSteering;
+  bool turnSignalLeft;
+  bool turnSignalRight;
 
   float torque;
 
@@ -34,4 +42,6 @@ private:
   QRegion marginRegion;
 
   QString fpsDisplayString;
+
+  QTimer *signalTimer;
 };
